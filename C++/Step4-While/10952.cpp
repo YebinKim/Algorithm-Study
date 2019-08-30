@@ -1,6 +1,6 @@
 //
 //  10952.cpp
-//  Step3-While
+//  Step4-While
 //
 //  Created by 김예빈 on 2019. 8. 29..
 //  Copyright © 2019년 김예빈. All rights reserved.
