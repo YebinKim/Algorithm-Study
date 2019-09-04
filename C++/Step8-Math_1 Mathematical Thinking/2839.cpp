@@ -1,6 +1,6 @@
 //
 //  2839.cpp
-//  Step8-Step8-Math_1 Mathematical Thinking
+//  Step8-Math_1 Mathematical Thinking
 //
 //  Created by 김예빈 on 2019. 9. 3..
 //  Copyright © 2019년 김예빈. All rights reserved.

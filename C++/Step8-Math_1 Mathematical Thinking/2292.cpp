@@ -1,8 +1,8 @@
 //
-//  1712.cpp
+//  2292.cpp
 //  Step8-Math_1 Mathematical Thinking
 //
-//  Created by 김예빈 on 2019. 9. 3..
+//  Created by 김예빈 on 2019. 9. 4..
 //  Copyright © 2019년 김예빈. All rights reserved.
 //
 
@@ -13,14 +13,15 @@ int main(int argc, const char * argv[]) {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int a, b, c, result;
+    int n, result = 1;
     
-    cin >> a >> b >> c;
+    cin >> n;
     
-    if(c - b > 0)
-        result = a / (c - b) + 1;
-    else
-        result = -1;
+    n -= 1;
+    
+    while (n > 0) {
+        n -= 6 * result++;
+    }
     
     cout << result;
     
