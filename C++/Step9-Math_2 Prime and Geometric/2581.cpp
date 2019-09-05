@@ -1,8 +1,8 @@
 //
-//  1978.cpp
+//  2581.cpp
 //  Step9-Math_2 Prime and Geometric
 //
-//  Created by 김예빈 on 2019. 9. 4..
+//  Created by 김예빈 on 2019. 9. 5..
 //  Copyright © 2019년 김예빈. All rights reserved.
 //
 
@@ -15,20 +15,24 @@ int main(int argc, const char * argv[]) {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int n, cnt = 0, i;
+    int start, end, sum = 0, min = 10000, i;
     
-    cin >> n;
+    cin >> start >> end;
     
-    int num[n];
-    
-    for(i = 0; i < n; i++)
+    for(i = start; i <= end; i++)
     {
-        cin >> num[i];
-        if(searchPrime(num[i]))
-            cnt++;
+        if(searchPrime(i)) {
+            sum += i;
+            
+            if(i < min)
+                min = i;
+        }
     }
     
-    cout << cnt << "\n";
+    if(sum != 0)
+        cout << sum << "\n" << min;
+    else
+        cout << "-1";
     
     return 0;
 }
