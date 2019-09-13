@@ -14,7 +14,7 @@ int main(int argc, const char * argv[]) {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int n, min, result = 0, i, j;
+    int n, max, result = 0, i, j;
     
     cin >> n;
     
@@ -26,15 +26,15 @@ int main(int argc, const char * argv[]) {
         cin >> A[i];
     
     for(i = 1; i <= n; i++) {
-        min = 0;
+        max = 0;
         
         for(j = 0; j < i; j++)
             if(A[i] > A[j]) {
-                if (min < dp[j])
-                    min = dp[j];
+                if (max < dp[j])
+                    max = dp[j];
             }
         
-        dp[i] = min + 1;
+        dp[i] = max + 1;
         
         if(result < dp[i])
             result = dp[i];

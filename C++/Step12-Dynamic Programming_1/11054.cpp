@@ -6,8 +6,8 @@
 //  Copyright © 2019년 김예빈. All rights reserved.
 //
 
+// Using LIS(Longest Increasing Subsequence)
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main(int argc, const char * argv[]) {
