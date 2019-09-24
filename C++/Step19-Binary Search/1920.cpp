@@ -1,4 +1,3 @@
-
 //
 //  1920.cpp
 //  Step19-Binary Search
