@@ -2,12 +2,12 @@
 //  2164.cpp
 //  Step16-Queue and Deque
 //
-//  Created by 김예빈 on 2019. 9. 20..
+//  Created by 김예빈 on 2019. 9. 24..
 //  Copyright © 2019년 김예빈. All rights reserved.
 //
 
 #include <iostream>
-#include <deque>
+#include <queue>
 using namespace std;
 
 int main(int argc, const char * argv[]) {
@@ -15,20 +15,20 @@ int main(int argc, const char * argv[]) {
     ios::sync_with_stdio(false);
     
     int n;
-    deque<int> dq;
+    queue<int> q;
     
     cin >> n;
     
     for(int i = 1; i <= n; i++)
-        dq.push_back(i);
+        q.push(i);
     
-    while(dq.size() != 1) {
-        dq.pop_front();
-        dq.push_back(dq.front());
-        dq.pop_front();
+    while(q.size() != 1) {
+        q.pop();
+        q.push(q.front());
+        q.pop();
     }
     
-    cout << dq.front();
+    cout << q.front();
     
     return 0;
 }
