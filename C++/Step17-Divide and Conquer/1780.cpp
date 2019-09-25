@@ -15,6 +15,9 @@ int num1, num2, num3;
 void divide(int, int, int);
 
 int main(int argc, const char * argv[]) {
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    
     int n;
     num1 = 0;
     num2 = 0;

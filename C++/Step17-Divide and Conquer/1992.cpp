@@ -14,6 +14,9 @@ int square[64][64];
 void divide(int, int, int);
 
 int main(int argc, const char * argv[]) {
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    
     int n;
     scanf("%d", &n);
     
