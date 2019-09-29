@@ -30,8 +30,11 @@ int main(int argc, const char * argv[]) {
         
         if(result >= n) {
             left = mid + 1;
-            if(mid > max) max = mid;
-        } else if(result < n) right = mid-1;
+            
+            if(mid > max)
+                max = mid;
+        } else if(result < n)
+            right = mid-1;
     }
     
     cout << max;
