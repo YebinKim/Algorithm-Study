@@ -16,7 +16,7 @@ int n, arr[30][30], num[1010], cnt;
 int dx[4] = { 0, 0, -1, 1 };
 int dy[4] = { 1, -1, 0, 0 };
 
-void dfs(int x,int y) {
+void dfs(int x, int y) {
     check[x][y] = true;
     num[cnt]++;
     
