@@ -28,7 +28,7 @@ int main(int argc, const char * argv[]) {
 }
 
 int gcd(int a, int b) {
-    if (a % b == 0)
+    if(a % b == 0)
         return b;
     else
         return gcd(b, a % b);
