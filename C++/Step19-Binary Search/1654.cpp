@@ -11,6 +11,9 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    
     int k, n, result;
     long long max = 0, mid, left = 0, right = pow(2, 31) - 1;
     

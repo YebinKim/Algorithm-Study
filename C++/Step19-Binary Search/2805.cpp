@@ -10,6 +10,9 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    
     int n, m;
     long long result = 0, mid, left = 0, right = 0, sum;
     
