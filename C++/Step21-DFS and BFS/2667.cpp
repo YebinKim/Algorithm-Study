@@ -16,21 +16,11 @@ int n, arr[30][30], num[1010], cnt;
 int dx[4] = { 0, 0, -1, 1 };
 int dy[4] = { 1, -1, 0, 0 };
 
-void dfs(int x, int y) {
-    check[x][y] = true;
-    num[cnt]++;
-    
-    for(int i = 0; i < 4; i++) {
-        int nx = x + dx[i];
-        int ny = y + dy[i];
-        
-        if(0 <= nx && nx < n && 0 <= ny && ny < n)
-            if(!check[nx][ny] &&arr[nx][ny])
-                dfs(nx, ny);
-    }
-}
+void dfs(int x, int y);
 
 int main(int argc, const char * argv[]) {
+    ios::sync_with_stdio(false);
+    
     cin >> n;
     
     for(int i = 0; i < n; i++)
@@ -49,4 +39,18 @@ int main(int argc, const char * argv[]) {
     
     for(int i = 0; i < cnt; i++)
         printf("%d\n", num[i]);
+}
+
+void dfs(int x, int y) {
+    check[x][y] = true;
+    num[cnt]++;
+    
+    for(int i = 0; i < 4; i++) {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        
+        if(0 <= nx && nx < n && 0 <= ny && ny < n)
+            if(!check[nx][ny] &&arr[nx][ny])
+                dfs(nx, ny);
+    }
 }

@@ -15,22 +15,12 @@ int m, n, k, field[50][50];
 int dx[4] = { 0, 0, 1, -1 };
 int dy[4] = { 1, -1, 0, 0 };
 
-void dfs(int y, int x) {
-    if(check[y][x]) return;
-    
-    check[y][x] = true;
-    
-    for(int i = 0; i < 4; i++) {
-        int nextX = x + dx[i];
-        int nextY = y + dy[i];
-        
-        if (0 <= nextY && nextY < n && 0 <= nextX && nextX < m)
-            if (field[nextY][nextX])
-                dfs(nextY, nextX);
-    }
-}
+void dfs(int y, int x);
 
 int main(int argc, const char * argv[]) {
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    
     int t, x, y, cnt;
     
     cin >> t;
@@ -58,4 +48,19 @@ int main(int argc, const char * argv[]) {
     }
     
     return 0;
+}
+
+void dfs(int y, int x) {
+    if(check[y][x]) return;
+    
+    check[y][x] = true;
+    
+    for(int i = 0; i < 4; i++) {
+        int nextX = x + dx[i];
+        int nextY = y + dy[i];
+        
+        if (0 <= nextY && nextY < n && 0 <= nextX && nextX < m)
+            if (field[nextY][nextX])
+                dfs(nextY, nextX);
+    }
 }
