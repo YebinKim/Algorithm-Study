@@ -1,5 +1,5 @@
 //
-//  1753.cpp
+//  1504.cpp
 //  Step22-Shortest Path
 //
 //  Created by 김예빈 on 2019. 10. 6..
@@ -9,37 +9,43 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <limits.h>
+#include <algorithm>
 
 using namespace std;
 
-const int INF = INT_MAX;
+const int INF = 987654321;
 
 vector<int> dijkstra(vector<pair<int, int>>*, int, int);
 
 int main(int argc, const char * argv[]) {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
-
-    int v, e, k, source, destination, cost;
-    vector<pair<int, int>> graph[20001];
     
-    cin >> v >> e >> k;
+    int v, e, edge_u, edge_v, edge_w, node1, node2, cost;
+    vector<pair<int, int>> graph[801];
+    
+    cin >> v >> e;
     
     for(int i = 0; i < e; i++) {
-        cin >> source >> destination >> cost;
-        graph[source].push_back(make_pair(destination, cost));
+        cin >> edge_u >> edge_v >> edge_w;
+        
+        graph[edge_u].push_back(make_pair(edge_v, edge_w));
+        graph[edge_v].push_back(make_pair(edge_u, edge_w));
     }
     
     v++;
-    vector<int> result = dijkstra(graph, k, v);
+    cin >> node1 >> node2;
     
-    for(int i = 1; i < v; i++) {
-        if(result[i] == INF)
-            cout << "INF" << "\n";
-        else
-            cout << result[i] << "\n";
-    }
+    vector<int> result = dijkstra(graph, 1, v);
+    vector<int> temp1 = dijkstra(graph, node1, v);
+    vector<int> temp2 = dijkstra(graph, node2, v);
+    
+    cost = min(result[node1] + temp1[node2] + temp2[v - 1], result[node2] + temp2[node1] + temp1[v - 1]);
+    
+    if(cost < 0 || cost >= INF)
+        cout << -1 << "\n";
+    else
+        cout << cost << "\n";
     
     return 0;
 }
@@ -47,13 +53,13 @@ int main(int argc, const char * argv[]) {
 vector<int> dijkstra(vector<pair<int, int>> graph[], int start, int vertex) {
     int cost, curVertex, neighbor, neighborDistance;
     vector<int> dist(vertex, INF);
-    priority_queue<pair<int, int>> pq;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     
     dist[start] = 0;
     pq.push(make_pair(0, start));
     
     while(!pq.empty()) {
-        cost = -pq.top().first;
+        cost = pq.top().first;
         curVertex = pq.top().second;
         pq.pop();
         
@@ -65,7 +71,7 @@ vector<int> dijkstra(vector<pair<int, int>> graph[], int start, int vertex) {
             
             if(dist[neighbor] > neighborDistance) {
                 dist[neighbor] = neighborDistance;
-                pq.push(make_pair(-neighborDistance, neighbor));
+                pq.push(make_pair(neighborDistance, neighbor));
             }
         }
     }
