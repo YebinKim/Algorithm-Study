@@ -13,43 +13,7 @@ using namespace std;
 int n;
 vector<vector<int>> a;
 
-vector<vector<int>> divide(long long sqrd) {
-    vector<vector<int>> b(n, vector<int>(n));
-    vector<vector<int>> result(n, vector<int>(n));
-    
-    if(sqrd == 1) {
-        for(int i = 0; i < n; i ++)
-            for(int j = 0; j < n; j ++)
-                b[i][j] = a[i][j] % 1000;
-                
-        return b;
-    } else if(sqrd % 2 == 0) {
-        b = divide(sqrd / 2);
-        
-        for(int i = 0; i < n; i ++) {
-            for(int j = 0; j < n; j ++) {
-                for (int k = 0; k < n; k ++)
-                    result[i][j] += b[i][k] * b[k][j];
-                
-                result[i][j] %= 1000;
-            }
-        }
-        return result;
-    } else {
-        b = divide(sqrd - 1);
-        
-        // 행령 c*arr 진행
-        for (int i = 0; i < n; i ++) {
-            for (int j = 0; j < n; j ++) {
-                for (int k = 0; k < n; k ++)
-                    result[i][j] += b[i][k] * a[k][j];
-                    
-                result[i][j] %= 1000;
-            }
-        }
-        return result;
-    }
-}
+vector<vector<int>> divide(long long);
 
 int main(int argc, const char * argv[]) {
     ios_base::sync_with_stdio(0);
@@ -83,4 +47,41 @@ int main(int argc, const char * argv[]) {
     }
     
     return 0;
+}
+
+vector<vector<int>> divide(long long sqrd) {
+    vector<vector<int>> b(n, vector<int>(n));
+    vector<vector<int>> result(n, vector<int>(n));
+    
+    if(sqrd == 1) {
+        for(int i = 0; i < n; i ++)
+            for(int j = 0; j < n; j ++)
+                b[i][j] = a[i][j] % 1000;
+        
+        return b;
+    } else if(sqrd % 2 == 0) {
+        b = divide(sqrd / 2);
+        
+        for(int i = 0; i < n; i ++) {
+            for(int j = 0; j < n; j ++) {
+                for (int k = 0; k < n; k ++)
+                    result[i][j] += b[i][k] * b[k][j];
+                
+                result[i][j] %= 1000;
+            }
+        }
+        return result;
+    } else {
+        b = divide(sqrd - 1);
+        
+        for (int i = 0; i < n; i ++) {
+            for (int j = 0; j < n; j ++) {
+                for (int k = 0; k < n; k ++)
+                    result[i][j] += b[i][k] * a[k][j];
+                
+                result[i][j] %= 1000;
+            }
+        }
+        return result;
+    }
 }
