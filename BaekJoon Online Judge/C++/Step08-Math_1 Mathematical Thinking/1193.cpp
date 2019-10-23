@@ -1,15 +1,17 @@
 //
 //  1193.cpp
-//  Step8-Math_1 Mathematical Thinking
+//  Step08-Math_1 Mathematical Thinking
 //
-//  Created by 김예빈 on 2019. 9. 4..
-//  Copyright © 2019년 김예빈. All rights reserved.
+//  Created by Yebin Kim on 2019/10/23.
+//  Copyright © 2019 김예빈. All rights reserved.
 //
 
 #include <iostream>
+
 using namespace std;
 
-int main(int argc, const char * argv[]) {
+// Time Complexity O(n*log(n))
+int main() {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
@@ -17,8 +19,7 @@ int main(int argc, const char * argv[]) {
     
     cin >> n;
     
-    while (n > 0)
-        n -= a++;
+    while(n > 0) n -= a++;
     
     up = n + --a;
     down = ++a - up;

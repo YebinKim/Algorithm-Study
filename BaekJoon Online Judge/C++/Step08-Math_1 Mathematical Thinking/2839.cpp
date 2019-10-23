@@ -1,39 +1,43 @@
 //
 //  2839.cpp
-//  Step8-Math_1 Mathematical Thinking
+//  Step08-Math_1 Mathematical Thinking
 //
-//  Created by 김예빈 on 2019. 9. 3..
-//  Copyright © 2019년 김예빈. All rights reserved.
+//  Created by Yebin Kim on 2019/10/23.
+//  Copyright © 2019 김예빈. All rights reserved.
 //
 
 #include <iostream>
+
 using namespace std;
 
-int main(int argc, const char * argv[]) {
+// Time Complexity O(n*log(n))
+int main() {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int n, maxFive, maxThree, result = 0;
+    int n, five, three = 0;
+    int answer;
     
     cin >> n;
     
-    maxFive = n / 5;
+    five = n / 5;
     
-    while(maxFive >= 0) {
-        maxThree = n - (maxFive * 5);
+    while(five >= 0) {
+        three = n - (five * 5);
         
-        if (maxThree % 3 == 0) {
-            result = maxThree / 3 + maxFive;
+        if(three % 3 == 0) {
+            three /= 3;
             break;
-        }
-        else
-            maxFive--;
+        } else
+            five--;
     }
     
-    if(result <= 0)
-        cout << -1;
+    if(five < 0)
+        answer = -1;
     else
-        cout << result;
+        answer = five + three;
+    
+    cout << answer;
     
     return 0;
 }

@@ -1,53 +1,55 @@
 //
 //  6064.cpp
-//  Step8-Math_1 Mathematical Thinking
+//  Step08-Math_1 Mathematical Thinking
 //
-//  Created by 김예빈 on 2019. 9. 4..
-//  Copyright © 2019년 김예빈. All rights reserved.
+//  Created by Yebin Kim on 2019/10/23.
+//  Copyright © 2019 김예빈. All rights reserved.
 //
-
-// MARK - resolve later
 
 #include <iostream>
+
 using namespace std;
 
 int gcd(int, int);
 int lcm(int, int);
 
+// Time Complexity O(M*N)
 int main(int argc, const char * argv[]) {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int repeat, m, n, x, y, max, temp, i;
+    int TC, m, n, x, y, i, max, temp;
     
-    cin >> repeat;
+    cin >> TC;
     
-    while(repeat--) {
+    while(TC--) {
         cin >> m >> n >> x >> y;
         
         max = lcm(m, n);
         
-        for (i = x; i <= max; i += m) {
+        for(i = x; i <= max; i += m) {
             temp = (i % n == 0) ? n : i % n;
-            if (temp == y) {
+            
+            if(temp == y) {
                 cout << i << "\n";
                 break;
             }
         }
+        
         if (i > max)
             cout << "-1" << endl;
     }
+    
     return 0;
 }
 
-int gcd(int m, int n)
-{
+int gcd(int m, int n) {
     int tmp;
-    while (n)
-    {
+    
+    while(n) {
         tmp = m;
         m = n;
-        n = tmp%n;
+        n = tmp % n;
     }
     
     return m;
