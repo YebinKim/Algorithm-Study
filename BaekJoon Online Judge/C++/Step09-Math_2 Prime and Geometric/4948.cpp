@@ -7,26 +7,28 @@
 //
 
 #include <iostream>
+
 using namespace std;
 
 bool searchPrime(int);
 
+// Time Complexity O(n*log(n))
 int main(int argc, const char * argv[]) {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int n_1, n_2, cnt, i;
+    int n1, n2, cnt;
     
     while(1) {
-        cin >> n_1;
+        cin >> n1;
         
-        if(n_1 == 0)
-            break;
+        if(n1 == 0) break;
         
-        n_2 = n_1++ * 2;
         cnt = 0;
+        n2 = n1 * 2;
+        n1++;
         
-        for(i = n_1; i <= n_2; i++)
+        for(int i = n1; i <= n2; i++)
             if(searchPrime(i))
                 cnt++;
         
@@ -36,18 +38,12 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-bool searchPrime(int input)
-{
-    int i;
+bool searchPrime(int input) {
+    if(input < 2) return false;
     
-    if(input < 2)
-        return false;
-    
-    for(i = 2; i * i <= input; i++)
-    {
-        if((input % i) == 0)
+    for(int i = 2; i * i <= input; i++)
+        if(input % i == 0)
             return false;
-    }
     
     return true;
 }
