@@ -2,43 +2,56 @@
 //  1149.cpp
 //  Step12-Dynamic Programming_1
 //
-//  Created by 김예빈 on 2019. 9. 7..
-//  Copyright © 2019년 김예빈. All rights reserved.
+//  Created by Yebin Kim on 2019/10/25.
+//  Copyright © 2019 김예빈. All rights reserved.
 //
 
 #include <iostream>
+
 using namespace std;
 
-int main(int argc, const char * argv[]) {
+// Time Complexity O(n)
+int main() {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int n, minus, result, i, j;
+    int n;
+    int answer;
     
     cin >> n;
     
-    minus = n - 1;
+    int house[3][n];
+    int dp[3][n];
     
-    int house[n][3];
-    int cost[n][3];
+    for(int i = 0; i < n; i++)
+        for(int j = 0; j < 3; j++)
+            cin >> house[j][i];
     
-    for(i = 0; i < n; i++)
-        for(j = 0; j < 3; j++)
-            cin >> house[i][j];
+    dp[0][0] = house[0][0];
+    dp[1][0] = house[1][0];
+    dp[2][0] = house[2][0];
     
-    cost[0][0] = house[0][0];
-    cost[0][1] = house[0][1];
-    cost[0][2] = house[0][2];
-    
-    for(i = 1; i < n; i++) {
-        cost[i][0] = ((cost[i - 1][1] < cost[i - 1][2]) ? cost[i - 1][1] : cost[i - 1][2]) + house[i][0];
-        cost[i][1] = ((cost[i - 1][0] < cost[i - 1][2]) ? cost[i - 1][0] : cost[i - 1][2]) + house[i][1];
-        cost[i][2] = ((cost[i - 1][0] < cost[i - 1][1]) ? cost[i - 1][0] : cost[i - 1][1]) + house[i][2];
+    for(int i = 1; i < n; i++) {
+        dp[0][i] = ((dp[1][i - 1] < dp[2][i - 1]) ? dp[1][i - 1] : dp[2][i - 1]) + house[0][i];
+        dp[1][i] = ((dp[0][i - 1] < dp[2][i - 1]) ? dp[0][i - 1] : dp[2][i - 1]) + house[1][i];
+        dp[2][i] = ((dp[0][i - 1] < dp[1][i - 1]) ? dp[0][i - 1] : dp[1][i - 1]) + house[2][i];
     }
     
-    result = (cost[minus][0] < cost[minus][1]) ? (cost[minus][0] < cost[minus][2] ? cost[minus][0] : cost[minus][2]) : (cost[minus][1] < cost[minus][2] ? cost[minus][1] : cost[minus][2]);
+    if(dp[0][n - 1] < dp[1][n - 1]) {
+        if(dp[0][n - 1] < dp[2][n - 1]) {
+            answer = dp[0][n - 1];
+        } else {
+            answer = dp[2][n - 1];
+        }
+    } else {
+        if (dp[1][n - 1] < dp[2][n - 1]) {
+            answer = dp[1][n - 1];
+        } else {
+            answer = dp[2][n - 1];
+        }
+    }
     
-    cout << result;
+    cout << answer;
     
     return 0;
 }
