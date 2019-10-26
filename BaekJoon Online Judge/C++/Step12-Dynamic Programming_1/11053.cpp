@@ -2,45 +2,48 @@
 //  11053.cpp
 //  Step12-Dynamic Programming_1
 //
-//  Created by 김예빈 on 2019. 9. 11..
-//  Copyright © 2019년 김예빈. All rights reserved.
+//  Created by Yebin Kim on 2019/10/26.
+//  Copyright © 2019 김예빈. All rights reserved.
 //
 
-// Using LIS(Longest Increasing Subsequence)
 #include <iostream>
+
 using namespace std;
 
-int main(int argc, const char * argv[]) {
+// Time Complexity O(n^2)
+// Using LIS(Longest Increasing Subsequence)
+int main() {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int n, max, result = 0, i, j;
+    int n, max;
+    int answer = 0;
     
     cin >> n;
     
-    int A[n + 1];
+    int arr[n + 1];
     int dp[n + 1];
+    
     dp[0] = 0;
     
-    for(i = 1; i <= n; i++)
-        cin >> A[i];
+    for(int i = 1; i <= n; i++)
+        cin >> arr[i];
     
-    for(i = 1; i <= n; i++) {
+    for(int i = 1; i <= n; i++) {
         max = 0;
         
-        for(j = 0; j < i; j++)
-            if(A[i] > A[j]) {
-                if (max < dp[j])
-                    max = dp[j];
+        for(int j = 1; j < i; j++)
+            if(arr[j] < arr[i] && max < dp[j]) {
+                max = dp[j];
             }
         
         dp[i] = max + 1;
         
-        if(result < dp[i])
-            result = dp[i];
+        if(answer < dp[i])
+            answer = dp[i];
     }
     
-    cout << result;
+    cout << answer;
     
     return 0;
 }
