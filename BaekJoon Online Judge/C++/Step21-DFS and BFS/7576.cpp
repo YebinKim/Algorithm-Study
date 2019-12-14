@@ -24,6 +24,9 @@ bool allRipe();
 void BFS();
 
 int main() {
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    
     cin >> N >> M;
     
     for(int i = 0; i < M; i++) {
@@ -37,7 +40,7 @@ int main() {
         }
     }
     
-    if(dq.size() == M * N - empty)
+    if(dq.size() == N * M - empty)
         cout << 0 << endl;
     else
         BFS();
@@ -46,7 +49,7 @@ int main() {
 }
 
 bool allRipe() {
-    int possible = M * N - empty;
+    int possible = N * M - empty;
     int tomatoCnt = 0;
     
     for(int i = 0; i < M; i++)
@@ -69,9 +72,9 @@ void BFS() {
             int y = dq.front().first;
             int x = dq.front().second;
             
-            for(int i = 0; i < 4; i++) {
-                int ny = y + dirY[i];
-                int nx = x + dirX[i];
+            for(int j = 0; j < 4; j++) {
+                int ny = y + dirY[j];
+                int nx = x + dirX[j];
                 
                 if(ny >= 0 && ny < M && nx >= 0 && nx < N && tomato[ny][nx] == 0) {
                     tomato[ny][nx] = 1;

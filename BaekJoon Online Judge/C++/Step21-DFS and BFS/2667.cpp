@@ -19,6 +19,7 @@ int dy[4] = { 1, -1, 0, 0 };
 void dfs(int x, int y);
 
 int main(int argc, const char * argv[]) {
+    cin.tie(NULL);
     ios::sync_with_stdio(false);
     
     cin >> n;
