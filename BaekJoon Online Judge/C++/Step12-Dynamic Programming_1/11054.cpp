@@ -33,30 +33,20 @@ int main() {
         asec_max = 0;
         
         for(int j = 1; j < i; j++)
-            if(arr[i] > arr[j]) {
-                if (asec_max < asec_dp[j])
-                    asec_max = asec_dp[j];
-            }
+            if(arr[i] > arr[j] && asec_max < asec_dp[j])
+                asec_max = asec_dp[j];
         
         asec_dp[i] = asec_max + 1;
-        
-        if(asec_max < asec_dp[i])
-            asec_max = asec_dp[i];
     }
     
     for(int i = n; i >= 1; i--) {
         desc_max = 0;
         
         for(int j = n; j > i; j--)
-            if(arr[i] > arr[j]) {
-                if (desc_max < desc_dp[j])
-                    desc_max = desc_dp[j];
-            }
+            if(arr[i] > arr[j] && desc_max < desc_dp[j])
+                desc_max = desc_dp[j];
         
         desc_dp[i] = desc_max + 1;
-        
-        if(desc_max < desc_dp[i])
-            desc_max = desc_dp[i];
     }
     
     for(int i = 1; i <= n; i++)
