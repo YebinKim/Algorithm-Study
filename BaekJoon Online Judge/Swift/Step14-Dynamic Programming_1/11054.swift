@@ -10,8 +10,8 @@ import Foundation
 
 if let N = Int(readLine()!) {
     let num = readLine()!.split(separator: " ").map{ Int($0)! }
-    var asecDp = Array<Int>(repeating: 0, count: N + 1)
-    var descDp = Array<Int>(repeating: 0, count: N + 1)
+    var asecDp = Array<Int>(repeating: 0, count: N)
+    var descDp = Array<Int>(repeating: 0, count: N)
     
     for (i, e) in num.enumerated() {
         var max = 0
