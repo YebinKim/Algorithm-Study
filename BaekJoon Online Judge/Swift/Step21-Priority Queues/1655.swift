@@ -1,5 +1,5 @@
 //
-//  11286.swift
+//  1655.swift
 //  Step21-Priority Queues
 //
 //  Created by Yebin Kim on 2020/01/11.
@@ -9,11 +9,15 @@
 public struct Heap<T> {
     private var elements: [T]
     public let compare: (T, T) -> Bool
-    
+
     init(elements: [T] = [], compare: @escaping (T, T) -> Bool) {
         self.elements = elements
         self.compare = compare
         buildHeap()
+    }
+
+    public var count: Int {
+        return elements.count
     }
 
     public func top() -> T? {
@@ -25,21 +29,20 @@ public struct Heap<T> {
         shiftUp(elements.count - 1)
     }
 
-    public mutating func pop() -> T? {
-        if elements.count == 0 { return nil }
-        let ret = elements.first
+    public mutating func pop() {
+        if elements.count == 0 { return }
         elements.swapAt(0, elements.count - 1)
         let _ = elements.popLast()
         shiftDown(0)
-        return ret
+        return
     }
-    
+
     private mutating func buildHeap() {
         for i in (0..<elements.count / 2).reversed() {
             shiftDown(i)
         }
     }
-    
+
     private mutating func shiftUp(_ index: Int) {
         var index = index
         while true {
@@ -49,7 +52,7 @@ public struct Heap<T> {
             index = parent
         }
     }
-    
+
     private mutating func shiftDown(_ index: Int) {
         var index = index
         while true {
@@ -67,23 +70,29 @@ public struct Heap<T> {
     }
 }
 
-var plusHeap = Heap<Int>(compare: <)
-var minusHeap = Heap<Int>(compare: >)
+var maxHeap = Heap<Int>(compare: >)
+var minHeap = Heap<Int>(compare: <)
 
 for _ in 1...Int(readLine()!)! {
-    let x = Int(readLine()!)!
-    
-    if x == 0 {
-        if plusHeap.top() ?? 0 < abs(minusHeap.top() ?? 0) {
-            print(plusHeap.pop() ?? minusHeap.pop() ?? 0)
+    let N = Int(readLine()!)!
+
+    if let top = maxHeap.top() {
+        if top < N {
+            minHeap.push(N)
         } else {
-            print(minusHeap.pop() ?? plusHeap.pop() ?? 0)
+            maxHeap.push(N)
         }
     } else {
-        if x > 0 {
-            plusHeap.push(x)
-        } else {
-            minusHeap.push(x)
-        }
+        maxHeap.push(N)
     }
+
+    if minHeap.count > maxHeap.count, let top = minHeap.top() {
+        maxHeap.push(top)
+        minHeap.pop()
+    } else if maxHeap.count > minHeap.count + 1, let top = maxHeap.top() {
+        minHeap.push(top)
+        maxHeap.pop()
+    }
+
+    print(maxHeap.top() ?? 0)
 }

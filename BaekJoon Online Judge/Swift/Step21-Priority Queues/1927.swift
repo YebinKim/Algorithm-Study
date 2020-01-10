@@ -2,13 +2,12 @@
 //  1927.swift
 //  Step21-Priority Queues
 //
-//  Created by Yebin Kim on 2020/01/09.
+//  Created by Yebin Kim on 2020/01/11.
 //  Copyright © 2020 김예빈. All rights reserved.
 //
 
 public struct Heap<T> {
     private var elements: [T]
-    
     public let compare: (T, T) -> Bool
     
     init(elements: [T] = [], compare: @escaping (T, T) -> Bool) {
@@ -16,40 +15,32 @@ public struct Heap<T> {
         self.compare = compare
         buildHeap()
     }
-    
-    public var count: Int {
-        return elements.count
-    }
-    
-    public var isEmpty: Bool {
-        return elements.isEmpty
-    }
 
     public func top() -> T? {
         return elements.first
     }
 
-    public mutating func push(value: T) {
+    public mutating func push(_ value: T) {
         elements.append(value)
-        shiftUp(index: elements.count - 1)
+        shiftUp(elements.count - 1)
     }
 
     public mutating func pop() -> T? {
         if elements.count == 0 { return nil }
-        let res = elements.first
+        let ret = elements.first
         elements.swapAt(0, elements.count - 1)
         let _ = elements.popLast()
-        shiftDown(index: 0)
-        return res
+        shiftDown(0)
+        return ret
     }
-
+    
     private mutating func buildHeap() {
         for i in (0..<elements.count / 2).reversed() {
-            shiftDown(index: i)
+            shiftDown(i)
         }
     }
     
-    private mutating func shiftUp(index: Int) {
+    private mutating func shiftUp(_ index: Int) {
         var index = index
         while true {
             let parent = (index - 1) / 2
@@ -59,7 +50,7 @@ public struct Heap<T> {
         }
     }
     
-    private mutating func shiftDown(index: Int) {
+    private mutating func shiftDown(_ index: Int) {
         var index = index
         while true {
             let child: Int
@@ -81,9 +72,9 @@ var heap = Heap<Int>(compare: <)
 
 for _ in 1...N {
     let x = Int(readLine()!)!
+    
     if x == 0 {
-        let e = heap.pop()
-        print(e == nil ? 0 : e!)
+        print(heap.pop() ?? 0)
     } else {
         heap.push(value: x)
     }
