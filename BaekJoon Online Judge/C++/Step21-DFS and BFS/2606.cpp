@@ -2,39 +2,42 @@
 //  2606.cpp
 //  Step21-DFS and BFS
 //
-//  Created by 김예빈 on 2019. 9. 20..
-//  Copyright © 2019년 김예빈. All rights reserved.
+//  Created by Yebin Kim on 2020/02/13.
+//  Copyright © 2020 김예빈. All rights reserved.
 //
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cstring>
 using namespace std;
 
 void dfs(int, vector<int>[], bool[]);
 
-int main(int argc, const char * argv[]) {
+int main() {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int n, m, v1, v2, result = 0;
+    int n, m, start = 1, result = 0;
     
     cin >> n >> m;
     
     vector<int> graph[n + 1];
     bool check[n + 1];
-    fill(check, check + n + 1, false);
+    memset(check, false, sizeof(check));
     
     for(int i = 0; i < m; i++) {
-        cin >> v1 >> v2;
-        graph[v1].push_back(v2);
-        graph[v2].push_back(v1);
+        int u, v;
+        cin >> u >> v;
+        
+        graph[u].push_back(v);
+        graph[v].push_back(u);
     }
     
     for(int i = 1; i <= n; i++)
         sort(graph[i].begin(), graph[i].end());
     
-    dfs(1, graph, check);
+    dfs(start, graph, check);
     
     for(int i = 1; i <= n; i++)
         if(check[i])
@@ -46,13 +49,12 @@ int main(int argc, const char * argv[]) {
 }
 
 void dfs(int start, vector<int> graph[], bool check[]) {
-    check[start]= true;
+    check[start] = true;
     
     for(int i = 0; i < graph[start].size(); i++) {
         int next = graph[start][i];
         
-        if(check[next] == false) {
+        if(check[next] == false)
             dfs(next, graph, check);
-        }
     }
 }
