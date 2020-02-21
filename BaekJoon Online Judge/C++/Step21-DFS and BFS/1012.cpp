@@ -2,8 +2,8 @@
 //  1012.cpp
 //  Step21-DFS and BFS
 //
-//  Created by 김예빈 on 2019. 9. 30..
-//  Copyright © 2019년 김예빈. All rights reserved.
+//  Created by Yebin Kim on 2020/02/21.
+//  Copyright © 2020 김예빈. All rights reserved.
 //
 
 #include <iostream>
@@ -12,20 +12,18 @@ using namespace std;
 
 bool check[50][50];
 int m, n, k, field[50][50];
-int dx[4] = { 0, 0, 1, -1 };
-int dy[4] = { 1, -1, 0, 0 };
 
-void dfs(int y, int x);
+void dfs(int, int);
 
-int main(int argc, const char * argv[]) {
+int main() {
     cin.tie(NULL);
     ios::sync_with_stdio(false);
     
-    int t, x, y, cnt;
+    int tc, x, y, cnt;
     
-    cin >> t;
+    cin >> tc;
     
-    while(t--) {
+    while(tc--) {
         cin >> m >> n >> k;
         
         cnt = 0;
@@ -51,16 +49,18 @@ int main(int argc, const char * argv[]) {
 }
 
 void dfs(int y, int x) {
-    if(check[y][x]) return;
+    int dx[4] = { 0, 0, 1, -1 };
+    int dy[4] = { 1, -1, 0, 0 };
     
+    if(check[y][x]) return;
     check[y][x] = true;
     
     for(int i = 0; i < 4; i++) {
         int nextX = x + dx[i];
         int nextY = y + dy[i];
         
-        if (0 <= nextY && nextY < n && 0 <= nextX && nextX < m)
-            if (field[nextY][nextX])
+        if(nextY >= 0 && nextY < n && nextX >= 0 && nextX < m)
+            if(field[nextY][nextX])
                 dfs(nextY, nextX);
     }
 }
